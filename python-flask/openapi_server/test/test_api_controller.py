@@ -19,7 +19,7 @@ class TestApiController(BaseTestCase):
         """
         headers = { 
             'Accept': 'text/plain',
-            'x-api-key': 'special-key',
+            'api_key': 'special-key',
         }
         response = self.client.open(
             '/api/tx/{txid}'.format(txid='txid_example'),
