@@ -1,0 +1,53 @@
+openapi: 3.0.1
+info:
+  description: This is `flask_base`.
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+  title: OpenAPI flask_base
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: base api
+  name: api
+paths:
+  /api/tx/{txid}:
+    get:
+      description: get
+      operationId: api_tx
+      parameters:
+      - description: transaction id
+        explode: true
+        in: path
+        name: txid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                format: binary
+                type: string
+          description: successful operation
+        "400":
+          content: {}
+          description: Invalid status value
+      security:
+      - x-api-key: []
+      summary: get transaction
+      tags:
+      - api
+      x-codegen-request-body-name: body
+      x-openapi-router-controller: openapi_server.controllers.api_tx_controller
+components:
+  schemas: {}
+  securitySchemes:
+    x-api-key:
+      in: header
+      name: x-api-key
+      type: apiKey
+      x-apikeyInfoFunc: openapi_server.controllers.security_controller_.info_from_api_key
